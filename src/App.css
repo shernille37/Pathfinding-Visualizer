@@ -2,3 +2,15 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.grid {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+}
