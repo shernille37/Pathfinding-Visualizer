@@ -1,8 +1,10 @@
 import React from 'react';
 import '../assets/node.css';
 
-const Node = () => {
-  return <div className='node'></div>;
+const Node = ({ isStart, isFinish }) => {
+  const extraClasses = isFinish ? 'node-finish' : isStart ? 'node-start' : '';
+
+  return <div className={`node ${extraClasses}`}></div>;
 };
 
 export default Node;

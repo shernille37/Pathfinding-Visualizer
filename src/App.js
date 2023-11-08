@@ -10,18 +10,22 @@ const App = () => {
 
   useEffect(() => {
     let temp_nodes = [];
-    for (let i = 0; i < NUM_ROWS; i++) {
+    for (let row = 0; row < NUM_ROWS; row++) {
       let currentRow = [];
 
-      for (let j = 0; j < NUM_COLS; j++) {
-        currentRow.push([]);
+      for (let col = 0; col < NUM_COLS; col++) {
+        currentRow.push({
+          row,
+          col,
+          isStart: row == 10 && col == 5,
+          isFinish: row == 10 && col == 45,
+        });
       }
       temp_nodes.push(currentRow);
     }
 
     setNodes(temp_nodes);
   }, []);
-  console.log(nodes);
 
   return (
     <div className='App'>
@@ -29,9 +33,16 @@ const App = () => {
         {nodes.map((row, index1) => {
           return (
             <div key={index1} className='row'>
-              {row.map((node, index2) => (
-                <Node key={index2}></Node>
-              ))}
+              {row.map((node, index2) => {
+                const { isStart, isFinish } = node;
+                return (
+                  <Node
+                    key={index2}
+                    isStart={isStart}
+                    isFinish={isFinish}
+                  ></Node>
+                );
+              })}
             </div>
           );
         })}
