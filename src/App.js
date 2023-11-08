@@ -7,30 +7,53 @@ const App = () => {
   const NUM_ROWS = 20;
   const NUM_COLS = 60;
 
+  const coordinates = {
+    START_NODE_ROW: 10,
+    START_NODE_COL: 10,
+    FINISH_NODE_ROW: 10,
+    FINISH_NODE_COL: 50,
+  };
+
   const [nodes, setNodes] = useState([]);
 
   useEffect(() => {
+    let grid_nodes = createGrid();
+    setNodes(grid_nodes);
+  }, []);
+
+  const createGrid = () => {
     let temp_nodes = [];
     for (let row = 0; row < NUM_ROWS; row++) {
       let currentRow = [];
 
       for (let col = 0; col < NUM_COLS; col++) {
-        currentRow.push({
-          row,
-          col,
-          isStart: row == 10 && col == 10,
-          isFinish: row == 10 && col == 50,
-        });
+        currentRow.push(createNode(row, col));
       }
       temp_nodes.push(currentRow);
     }
 
-    setNodes(temp_nodes);
-  }, []);
+    return temp_nodes;
+  };
+
+  const createNode = (row, col) => {
+    return {
+      col,
+      row,
+      isStart:
+        row == coordinates.START_NODE_ROW && col == coordinates.START_NODE_COL,
+      isFinish:
+        row == coordinates.FINISH_NODE_ROW &&
+        col == coordinates.FINISH_NODE_COL,
+      distance: Infinity,
+      isVisited: false,
+      isWall: false,
+      previousNode: null,
+    };
+  };
 
   return (
     <div className='App'>
-      <Header />
+      <Header nodes={nodes} coordinates={coordinates} />
       <div className='grid'>
         {nodes.map((row, index1) => {
           return (
