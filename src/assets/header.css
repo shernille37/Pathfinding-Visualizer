@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #463939;
+}
+
+.header h1 {
+  margin-left: 2rem;
+  color: #fff;
+}
+
+.start-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  margin-right: 2rem;
+}
+
+.start-button button {
+  padding: 0.5rem;
+}

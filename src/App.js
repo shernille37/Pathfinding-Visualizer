@@ -1,10 +1,11 @@
 import './App.css';
+import Header from './components/Header';
 import Node from './components/Node';
 import { useState, useEffect } from 'react';
 
 const App = () => {
   const NUM_ROWS = 20;
-  const NUM_COLS = 50;
+  const NUM_COLS = 60;
 
   const [nodes, setNodes] = useState([]);
 
@@ -17,8 +18,8 @@ const App = () => {
         currentRow.push({
           row,
           col,
-          isStart: row == 10 && col == 5,
-          isFinish: row == 10 && col == 45,
+          isStart: row == 10 && col == 10,
+          isFinish: row == 10 && col == 50,
         });
       }
       temp_nodes.push(currentRow);
@@ -29,6 +30,7 @@ const App = () => {
 
   return (
     <div className='App'>
+      <Header />
       <div className='grid'>
         {nodes.map((row, index1) => {
           return (
