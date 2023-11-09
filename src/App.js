@@ -1,7 +1,7 @@
 import './App.css';
-import { getShortestPath } from './algorithms/dijkstra';
 import Header from './components/Header';
 import Node from './components/Node';
+import { animateVisitedNodes } from './animations/animations';
 import { useState, useEffect } from 'react';
 
 const App = () => {
@@ -24,34 +24,7 @@ const App = () => {
       let grid_nodes = createGrid();
       setNodes(grid_nodes);
     }
-  }, []);
-
-  const animateVisitedNodes = (visitedNodes, shortestPath) => {
-    visitedNodes.forEach((node, i) => {
-      if (node.isFinish) {
-        setTimeout(() => {
-          animateShortestPath(shortestPath);
-        }, 10 * i);
-
-        return;
-      }
-
-      setTimeout(() => {
-        node.isVisited = true;
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-isVisited';
-      }, 10 * i);
-    });
-  };
-
-  const animateShortestPath = (shortestPath) => {
-    shortestPath.forEach((node, i) => {
-      setTimeout(() => {
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-shortest-path';
-      }, 15 * i);
-    });
-  };
+  }, [nodes]);
 
   const createGrid = () => {
     let temp_nodes = [];
