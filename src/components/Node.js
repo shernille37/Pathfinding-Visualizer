@@ -15,13 +15,16 @@ const Node = ({
     ? 'node-start'
     : isWall
     ? 'node-wall'
+    : isVisited
+    ? 'node-isVisited'
     : '';
 
-  const visitedClass = isVisited ? 'node-isVisited' : '';
+  //const visitedClass = isVisited ? 'node-isVisited' : '';
 
   return (
     <div
-      className={`node ${extraClasses} ${visitedClass}`}
+      id={`node-${row}-${col}`}
+      className={`node ${extraClasses}`}
       onMouseDown={() => handleMouseDown(row, col)}
       onMouseEnter={() => handleMouseEnter(row, col)}
       onMouseUp={() => handleMouseLeave()}
