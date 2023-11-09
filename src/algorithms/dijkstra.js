@@ -10,6 +10,7 @@ export const dijkstra = (nodes, startNode, finishNode) => {
     sortNodesByDistance(unvisitedNodes);
     const closestNode = unvisitedNodes.shift();
 
+    closestNode.isVisited = true;
     // If we encounter a wall
     if (closestNode.isWall) continue;
 
@@ -50,15 +51,14 @@ const getUnvisitedNeighbors = (currentNode, nodes) => {
   return neighbors.filter((node) => !node.isVisited);
 };
 
-export const getShortestPath = (visitedNodes) => {
+export const getShortestPath = (finishNode) => {
   // Backtrack: currentNode is the last element
-  let currentNode = visitedNodes.pop();
   const shortestPath = [];
-  console.log(currentNode);
-  // while (currentNode.previousNode != null) {
-  //   shortestPath.unshift(currentNode);
-  //   currentNode = currentNode.previousNode;
-  // }
+  let currentNode = finishNode;
+  while (currentNode !== null) {
+    shortestPath.unshift(currentNode);
+    currentNode = currentNode.previousNode;
+  }
 
   return shortestPath;
 };

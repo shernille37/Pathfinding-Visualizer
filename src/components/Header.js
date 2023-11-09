@@ -1,15 +1,16 @@
 import React from 'react';
 import '../assets/header.css';
-import { dijkstra } from '../algorithms/dijkstra';
+import { dijkstra, getShortestPath } from '../algorithms/dijkstra';
 
-const Header = ({ nodes, coordinates, setVisitedNodes }) => {
+const Header = ({ nodes, coordinates, animateVisitedNodes }) => {
   const handleDijkstra = (nodes) => {
     const { START_NODE_ROW, START_NODE_COL, FINISH_NODE_ROW, FINISH_NODE_COL } =
       coordinates;
     const startNode = nodes[START_NODE_ROW][START_NODE_COL];
     const finishNode = nodes[FINISH_NODE_ROW][FINISH_NODE_COL];
     const visitedNodesInOrder = dijkstra(nodes, startNode, finishNode);
-    setVisitedNodes(visitedNodesInOrder);
+    const shortestPath = getShortestPath(finishNode);
+    animateVisitedNodes(visitedNodesInOrder, shortestPath);
   };
 
   return (

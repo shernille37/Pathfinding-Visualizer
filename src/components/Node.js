@@ -19,8 +19,6 @@ const Node = ({
     ? 'node-isVisited'
     : '';
 
-  //const visitedClass = isVisited ? 'node-isVisited' : '';
-
   return (
     <div
       id={`node-${row}-${col}`}
