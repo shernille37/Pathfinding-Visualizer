@@ -9,7 +9,6 @@ export const animateVisitedNodes = (visitedNodes, shortestPath) => {
     }
 
     setTimeout(() => {
-      node.isVisited = true;
       document.getElementById(`node-${node.row}-${node.col}`).className =
         'node node-isVisited';
     }, 10 * i);
@@ -21,6 +20,6 @@ const animateShortestPath = (shortestPath) => {
     setTimeout(() => {
       document.getElementById(`node-${node.row}-${node.col}`).className =
         'node node-shortest-path';
-    }, 15 * i);
+    }, 10 * i);
   });
 };
