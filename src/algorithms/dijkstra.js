@@ -24,6 +24,8 @@ export const dijkstra = (nodes, startNode, finishNode) => {
   }
 };
 
+
+// Use Min Heap
 const sortNodesByDistance = (nodes) => {
   nodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
 };
