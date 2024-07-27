@@ -3,7 +3,7 @@ export const animateVisitedNodes = (visitedNodes, shortestPath) => {
     if (node.isFinish) {
       setTimeout(() => {
         animateShortestPath(shortestPath);
-      }, 10 * i);
+      }, 1 * i);
 
       return;
     }
@@ -11,7 +11,7 @@ export const animateVisitedNodes = (visitedNodes, shortestPath) => {
     setTimeout(() => {
       document.getElementById(`node-${node.row}-${node.col}`).className =
         'node node-isVisited';
-    }, 10 * i);
+    }, 1 * i);
   });
 };
 

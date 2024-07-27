@@ -1,34 +1,36 @@
+import { MinHeap } from "./minheap";
+
 export const dijkstra = (nodes, startNode, finishNode) => {
   const visitedNodesInOrder = [];
   startNode.distance = 0;
+  
+  const compareFunction = (a, b) => a.distance - b.distance;
+  let min_heap = new MinHeap(compareFunction) 
+  min_heap.add(startNode)
 
-  // Unvisited Nodes is an array of object nodes that are unvisited
-  const unvisitedNodes = getAllNodes(nodes);
+  while (!min_heap.isEmpty()) {
 
-  // !!unvistedNodes.length is equal to the expression while(unvisitedNodes.length != 0)
-  while (!!unvisitedNodes.length) {
-    sortNodesByDistance(unvisitedNodes);
-    const closestNode = unvisitedNodes.shift();
+    // Extract minimum
+    const closestNode = min_heap.get_min()
 
-    closestNode.isVisited = true;
+    if(!closestNode.isVisited)
+      closestNode.isVisited = true;
+    else
+      continue;
+    
     // If we encounter a wall
     if (closestNode.isWall) continue;
-
-    // If we're trapped
-    if (closestNode.distance == Infinity) return visitedNodesInOrder;
-
+    
     visitedNodesInOrder.push(closestNode);
     if (closestNode == finishNode) return visitedNodesInOrder;
 
-    updateUnvisitedNeighbors(closestNode, nodes);
+    updateUnvisitedNeighbors(closestNode, nodes).forEach(node => min_heap.add(node))
   }
+
+  // If we're trapped, no shortest path exists
+  return visitedNodesInOrder
 };
 
-
-// Use Min Heap
-const sortNodesByDistance = (nodes) => {
-  nodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
-};
 
 const updateUnvisitedNeighbors = (currentNode, nodes) => {
   const unvisitedNeighbors = getUnvisitedNeighbors(currentNode, nodes);
@@ -37,6 +39,8 @@ const updateUnvisitedNeighbors = (currentNode, nodes) => {
     node.distance = currentNode.distance + 1;
     node.previousNode = currentNode;
   });
+
+  return unvisitedNeighbors
 };
 
 const getUnvisitedNeighbors = (currentNode, nodes) => {
